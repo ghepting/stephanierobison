@@ -1,0 +1,10 @@
+# Site settings
+title: Stephanie Robison
+email: stephanie@stephanierobison.com
+description: ""
+baseurl: ""
+url: "http://stephanierobison.com"
+
+# Build settings
+markdown: kramdown
+permalink: pretty

@@ -1,0 +1,75 @@
+<!--
+switch($_REQUEST['set']) {
+  case 'sculptures':
+    $set = '72157628874159401';
+    $first = 'http://farm8.staticflickr.com/7159/6732752243_d1abee0bb2.jpg';
+    $caption = 'Offering';
+    $desc = nl2br('2007
+31"x 20"x 20"
+wood, white marble, orange alabaster');
+    break;
+  case 'drawings':
+    $set = '72157628956831599';
+    $first = 'http://farm8.staticflickr.com/7004/6743248521_a2eee58b2e.jpg';
+    $caption = 'EGO';
+    $desc =  nl2br('2009
+9" x 12"
+ink, watercolor & foil tape on paper');
+    break;
+  case 'site-specific':
+    $set = '72157628874149751';
+    $first = 'http://farm8.staticflickr.com/7141/6732752505_b591deac3c.jpg';
+    $caption = 'Water Landing';
+    $desc = nl2br('2007
+12\' x 9\' x 13\'
+wood, fabric, linoleum, foam, cotton batting, pocket change');
+    break;
+}
+-->
+
+{% assign image = '{{image}}' %}
+{% assign title = '{{title}}' %}
+{% assign image_s = '{{image_s}}' %}
+{% assign description = '{{description}}' %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="{{ site.description }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="stylesheet" href="{{ "/jflickrfeed/colorbox/colorbox.css" | prepend: site.baseurl }}"> 
+    <link rel="stylesheet" href="{{ "/css/styles.css" | prepend: site.baseurl }}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="{{ "/jflickrfeed/colorbox/jquery.colorbox-min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/jflickrfeed/cycle/jquery.cycle.all.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/jflickrfeed/jflickrfeed.min.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('#worksamples').jflickrfeed({
+          feedapi: 'photoset.gne',
+          limit: 18,
+          qstrings: {
+          set: '{{ page.set }}',
+          nsid: '74360641@N07' 
+          },
+          itemTemplate:
+          '<li>' +
+            '<a rel="{{image}}" href="{{image}}" title="{{title}}">' +
+              '<img src="{{image_s}}" alt="{{title}}" />' +
+              '<span class="desc" style="display:none;">{{description}}</span>' +
+            '</a>' +
+          '</li>'
+        }, function(data) {
+          $('#worksamples a').click(function() {
+            $('#largeImage img').hide().attr('src', $(this).attr('rel')).fadeIn(500);
+            $('div#caption').hide().text($(this).attr('title')).fadeIn(500);
+            $('div#desc').hide().html($(this).children('span').html()).fadeIn(500);
+            return false;
+          });
+        });
+        $('a[rel=colorbox]').colorbox();
+      });
+    </script>
+</head>
