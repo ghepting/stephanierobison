@@ -1,4 +1,4 @@
-/* 
+/*
 
 Some basic styling to get your page rolling - feel free to trash it all
 Enjoy!
@@ -25,6 +25,7 @@ body {
 	width:1030px;
 	font-size:1.3em;
 }
+img { max-width: 100%; height: auto; }
 a img, img.frame {border: 1px solid #ccc;padding:2px;margin:3px}
 a:hover img{border: 1px solid #999;padding:2px;}
 a:hover{color: #222;border: 0px ;} /* Dummy definition to overcome IE bug */
